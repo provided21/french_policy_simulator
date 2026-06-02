@@ -45,10 +45,10 @@ def parse_response(response):
     # 确保分数在0-1范围内
     support_score = max(0.0, min(1.0, support_score))
 
-    # 判断立场
-    if support_score < 0.34:
+    # 判断立场：0-3反对，4-6中立，7-10支持
+    if support_score < 0.4:
         stance = "oppose"
-    elif support_score < 0.67:
+    elif support_score < 0.7:
         stance = "neutral"
     else:
         stance = "support"

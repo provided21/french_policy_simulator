@@ -10,7 +10,7 @@ import os
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from src.retriever import build_embeddings, build_faiss_index, build_faiss_index_ivf, save_index
+from src.retriever.build_index import build_embeddings, build_faiss_index, build_faiss_index_ivf, save_index
 from src.utils import Config
 
 

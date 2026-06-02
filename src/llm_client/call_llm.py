@@ -6,6 +6,7 @@ LLM 调用模块 - 使用 OpenAI 兼容接口（SiliconFlow）
 2. 响应缓存（相同 prompt 直接命中，避免重复调用）
 3. 纯 asyncio 异步 I/O（替代 ThreadPoolExecutor，避免 GIL 开销）
 4. 限速错误不重试（直接返回，不浪费配额）
+5. SQLite 单连接复用（避免 asyncio 下反复打开连接的 I/O 瓶颈）
 """
 
 import asyncio
@@ -72,42 +73,49 @@ class RateLimiter:
 
 
 class LLMCache:
-    """基于 SQLite 的 LLM 响应缓存"""
+    """基于 SQLite 的 LLM 响应缓存（单连接复用 + 线程锁）"""
 
     def __init__(self, cache_dir=None):
         if cache_dir is None:
             cache_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "cache")
         os.makedirs(cache_dir, exist_ok=True)
         self.db_path = os.path.join(cache_dir, "llm_cache.db")
+        self._conn = None
+        self._lock = threading.Lock()
         self._init_db()
 
+    def _get_conn(self):
+        if self._conn is None:
+            self._conn = sqlite3.connect(self.db_path, check_same_thread=False)
+            self._conn.execute("PRAGMA journal_mode=WAL")
+        return self._conn
+
     def _init_db(self):
-        with sqlite3.connect(self.db_path) as conn:
-            conn.execute("PRAGMA journal_mode=WAL")
-            conn.execute(
-                "CREATE TABLE IF NOT EXISTS cache ("
-                "  prompt_hash TEXT PRIMARY KEY,"
-                "  model TEXT NOT NULL,"
-                "  version INTEGER NOT NULL DEFAULT 0,"
-                "  response TEXT NOT NULL"
+        conn = sqlite3.connect(self.db_path)
+        conn.execute("PRAGMA journal_mode=WAL")
+        conn.execute(
+            "CREATE TABLE IF NOT EXISTS cache ("
+            "  prompt_hash TEXT PRIMARY KEY,"
+            "  model TEXT NOT NULL,"
+            "  version INTEGER NOT NULL DEFAULT 0,"
+            "  response TEXT NOT NULL"
             ")"
-            )
-            # 旧表迁移：添加 version 列
-            try:
-                conn.execute("ALTER TABLE cache ADD COLUMN version INTEGER NOT NULL DEFAULT 0")
-            except Exception:
-                pass  # 列已存在
-            conn.commit()
+        )
+        try:
+            conn.execute("ALTER TABLE cache ADD COLUMN version INTEGER NOT NULL DEFAULT 0")
+        except Exception:
+            pass
+        conn.commit()
+        conn.close()
 
     def get(self, prompt: str, model: str) -> str | None:
         h = hashlib.md5(f"{model}:{prompt}".encode()).hexdigest()
-        with sqlite3.connect(self.db_path) as conn:
-            row = conn.execute(
+        with self._lock:
+            row = self._get_conn().execute(
                 "SELECT response FROM cache WHERE prompt_hash = ? AND model = ? AND version = ?",
                 (h, model, CACHE_VERSION),
             ).fetchone()
         if row:
-            # 验证返回文本不是乱码
             resp = row[0]
             try:
                 resp.encode('utf-8')
@@ -118,17 +126,19 @@ class LLMCache:
 
     def put(self, prompt: str, model: str, response: str):
         h = hashlib.md5(f"{model}:{prompt}".encode()).hexdigest()
-        with sqlite3.connect(self.db_path) as conn:
-            conn.execute(
+        with self._lock:
+            self._get_conn().execute(
                 "INSERT OR REPLACE INTO cache (prompt_hash, model, version, response) VALUES (?, ?, ?, ?)",
                 (h, model, CACHE_VERSION, response),
             )
-            conn.commit()
+            self._get_conn().commit()
 
     def stats(self) -> dict:
-        with sqlite3.connect(self.db_path) as conn:
-            count = conn.execute("SELECT COUNT(*) FROM cache WHERE version = ?", (CACHE_VERSION,)).fetchone()[0]
-            size = os.path.getsize(self.db_path) if os.path.exists(self.db_path) else 0
+        with self._lock:
+            count = self._get_conn().execute(
+                "SELECT COUNT(*) FROM cache WHERE version = ?", (CACHE_VERSION,)
+            ).fetchone()[0]
+        size = os.path.getsize(self.db_path) if os.path.exists(self.db_path) else 0
         return {"count": count, "size_bytes": size}
 
 
@@ -168,7 +178,7 @@ class LLMClient:
 
     async def _call_single_llm(self, persona_id: str, prompt: str, max_retries: int = 3) -> Dict[str, Any]:
         """调用单个 LLM（带重试 + 缓存，限速错误不重试）"""
-        # 先查缓存
+        # 先查缓存（单连接复用，asyncio 下不再被 SQLite I/O 阻塞）
         cached = self.cache.get(prompt, self.model)
         if cached is not None:
             return {

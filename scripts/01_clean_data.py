@@ -12,10 +12,9 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.data_pipeline import (
-    load_full_data, clean_data, save_clean_data,
+    load_local_data, clean_data, save_clean_data,
     print_summary_stats
 )
-from src.utils import Config
 
 
 # ============================================
@@ -39,9 +38,13 @@ def main():
 
     # 1. 加载数据
     print("\n[1/3] 加载原始数据...")
-    print(f"      数据集: {Config.DATASET_NAME} (流式采样 100k)")
-    df = load_full_data(sample_size=100000, seed=42)
+    print("      数据源: data/nemotron_personas_france.csv")
+    df = load_local_data("data/nemotron_personas_france.csv")
     print(f"      加载完成：{len(df):,} 行，{len(df.columns)} 列")
+
+    # 如需采样 10 万条，取消下面这行注释：
+    # df = df.sample(n=100000, random_state=42).reset_index(drop=True)
+    # print(f"      采样后：{len(df):,} 行")
 
     # 2. 清洗数据
     print("\n[2/3] 清洗数据...")

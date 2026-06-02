@@ -22,7 +22,7 @@ class Config:
     # LLM 配置
     LLM_BASE_URL = os.getenv("LLM_BASE_URL", "https://api.siliconflow.cn/v1")
     LLM_API_KEY = os.getenv("LLM_API_KEY", "")
-    LLM_MODEL = os.getenv("LLM_MODEL", "Qwen/Qwen2.5-7B-Instruct")
+    LLM_MODEL = os.getenv("LLM_MODEL", "deepseek-ai/DeepSeek-V4-Flash")
 
     # 数据集配置
     DATASET_NAME = os.getenv("DATASET_NAME", "your_dataset_name_here")

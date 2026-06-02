@@ -28,6 +28,7 @@ Thumbs.db
 # 数据文件（大文件）
 data/*.faiss
 data/**/*.parquet
+data/*.db
 
 # 缓存
 src/cache/*.db
@@ -35,5 +36,20 @@ src/cache/*.db
 # 日志
 *.log
 
+# 模型文件（大文件，运行时下载）
+all-MiniLM-L6-v2/
+
+# CatBoost 训练日志
+catboost_info/
+
 # Jupyter
 .ipynb_checkpoints/
+
+# 未执行的实验脚本
+scripts/06_cross_model.py
+scripts/07_test_retest.py
+scripts/08_cross_topic.py
+scripts/09_cross_language.py
+
+# 原始调查 PDF（大文件）
+社会调查/

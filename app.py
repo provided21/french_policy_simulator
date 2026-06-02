@@ -27,10 +27,11 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
-from sentence_transformers import SentenceTransformer
 
 from src.utils import Config
-from src.retriever import load_index, search_similar, create_database_adapter
+from src.retriever.build_index import load_index
+from src.retriever.search import search_similar
+from src.retriever import create_database_adapter
 from src.llm_client import LLMClient, build_batch_prompts, parse_response, build_prompt
 from src.data_pipeline import load_local_data
 
@@ -331,25 +332,66 @@ def get_theme_colors():
 # ============================================
 
 
-@st.cache_data
+# 基础列（缓存在内存，~150 MB）：用于检索 + 筛选 + 图表
+_SLIM_COLS = [
+    "persona_id", "uuid", "age", "sex", "marital_status", "household_type",
+    "occupation", "education_level", "departement", "commune",
+]
+
+# 人物画像文本列（按需加载）：仅对检索结果加载
+_PERSONA_COLS = [
+    "persona", "cultural_background", "professional_persona",
+    "sports_persona", "arts_persona", "travel_persona", "culinary_persona",
+    "hobbies_and_interests", "career_goals_and_ambitions", "skills_and_expertise",
+]
+
+# 转 category 的列，进一步压缩内存
+_CATEGORY_COLS = ["sex", "marital_status", "household_type", "occupation",
+                  "education_level", "departement"]
+
+
+@st.cache_resource
 def load_data_cache():
-    """缓存数据加载（优先 parquet，回退 CSV 时指定类型加速）"""
+    """缓存基础数据（仅 ~150 MB，不加载人物画像文本列）"""
     parquet_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "processed", "df_full.parquet")
     if os.path.exists(parquet_path):
-        # pyarrow 后端降低内存占用约 40%（4.8GB -> ~2.8GB）
-        return pd.read_parquet(parquet_path, dtype_backend='pyarrow', engine='pyarrow')
-    # CSV 优化：只读必要列 + 指定类型
-    return pd.read_csv(Config.DATA_PATH, low_memory=False, engine="pyarrow")
+        df = pd.read_parquet(parquet_path, columns=_SLIM_COLS, engine="pyarrow")
+    else:
+        csv_cols = [c for c in _SLIM_COLS if c != "persona_id"]
+        df = pd.read_csv(Config.DATA_PATH, usecols=csv_cols, engine="pyarrow")
+        df["persona_id"] = df["uuid"].astype(str)
+    # 低基数列转 category，字符串变整数索引
+    for col in _CATEGORY_COLS:
+        if col in df.columns:
+            df[col] = df[col].astype("category")
+    return df
+
+
+def _load_persona_text(persona_ids):
+    """按需加载人物画像文本列（仅对检索到的 k 条结果）"""
+    parquet_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "processed", "df_full.parquet")
+    if not os.path.exists(parquet_path):
+        return None
+    import pyarrow.parquet as pq
+    table = pq.read_table(parquet_path, columns=["persona_id"] + _PERSONA_COLS)
+    df_text = table.to_pandas()
+    del table
+    df_text["persona_id_str"] = df_text["persona_id"].astype(str)
+    target = set(str(pid) for pid in persona_ids)
+    return df_text[df_text["persona_id_str"].isin(target)]
 
 
 @st.cache_resource
 def load_model():
-    """缓存 SentenceTransformer 模型"""
+    """缓存 SentenceTransformer 模型（延迟导入 torch，避免 Streamlit 启动卡顿）"""
+    from sentence_transformers import SentenceTransformer
     import io
     old_stdout = sys.stdout
     sys.stdout = io.StringIO()
     try:
-        model = SentenceTransformer('all-MiniLM-L6-v2')
+        import os
+        MODEL_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "all-MiniLM-L6-v2")
+        model = SentenceTransformer(MODEL_DIR)
     finally:
         sys.stdout = old_stdout
     return model
@@ -403,6 +445,17 @@ def run_pipeline(question, k, api_key=None, base_url=None, model=None, rpm=3000,
         st.write(f"🔍 正在检索 {k:,} 个相似人物...")
         results = search_similar(question, embed_model, index, df, k=k)
         st.caption(f"✅ 找到 {len(results):,} 条相似人物记录")
+        progress_bar.progress(35)
+
+        # --- 步骤 4.5: 按需加载人物画像文本 ---
+        st.write("📝 正在加载检索结果的人物画像...")
+        df_text = _load_persona_text(results["persona_id"].tolist())
+        if df_text is not None:
+            results = results.merge(
+                df_text[["persona_id_str"] + _PERSONA_COLS],
+                left_on="persona_id", right_on="persona_id_str",
+                how="left", suffixes=("", "_text")
+            ).drop(columns=["persona_id_str"])
         progress_bar.progress(40)
 
         # --- 步骤 5: 构建 Prompt ---

@@ -1,0 +1,93 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand*\HyPL@Entry[1]{}
+\citation{groves2009survey}
+\HyPL@Entry{0<</S/D>>}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\citation{argyle2023out}
+\citation{santurkar2023whose}
+\citation{park2023generative}
+\citation{barbera2015tweeting}
+\citation{hersh2015hacking}
+\citation{montgomery2018predicting}
+\citation{reimers2019sentence}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{2}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}LLMs as Simulated Survey Respondents}{2}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Computational Political Science}{2}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Sentence Embeddings for Social Science}{2}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Method}{2}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}System Architecture}{2}{subsection.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces System architecture overview. The pipeline transforms persona data through LLM simulation into structured responses, then evaluates at both macro (distributional) and micro (predictive) levels.}}{3}{figure.caption.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:architecture}{{1}{3}{System architecture overview. The pipeline transforms persona data through LLM simulation into structured responses, then evaluates at both macro (distributional) and micro (predictive) levels}{figure.caption.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Persona Generation}{3}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Prompt Engineering: Three Iterations}{3}{subsection.3.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Prompt iteration comparison and alignment with IFOP benchmark}}{4}{table.caption.2}\protected@file@percent }
+\newlabel{tab:prompt_iterations}{{1}{4}{Prompt iteration comparison and alignment with IFOP benchmark}{table.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}LLM Simulation Setup}{4}{subsection.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Sampling Strategies: Similarity Retrieval vs.\ Random Sampling}{4}{subsection.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}ML Features and Models}{4}{subsection.3.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}Evaluation Protocol}{5}{subsection.3.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{5}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}The Power of Prompts: From 89\% to 29\%}{5}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Alignment and Misalignment with IFOP}{5}{subsection.4.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Comparison of LLM simulation and IFOP survey by CSP occupational category (\% supporting ``Return to 62'')}}{5}{table.caption.3}\protected@file@percent }
+\newlabel{tab:occupation_compare}{{2}{5}{Comparison of LLM simulation and IFOP survey by CSP occupational category (\% supporting ``Return to 62'')}{table.caption.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Who Answers Matters: Similarity vs.\ Random}{6}{subsection.4.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Distribution comparison: similarity-based vs.\ random sampling}}{6}{table.caption.4}\protected@file@percent }
+\newlabel{tab:sampling_comparison}{{3}{6}{Distribution comparison: similarity-based vs.\ random sampling}{table.caption.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Age Dominates Everything: SHAP Analysis}{6}{subsection.4.4}\protected@file@percent }
+\newlabel{fig:shap_summary}{{2a}{7}{SHAP summary plot}{figure.caption.5}{}}
+\newlabel{sub@fig:shap_summary}{{a}{7}{SHAP summary plot}{figure.caption.5}{}}
+\newlabel{fig:shap_bar}{{2b}{7}{SHAP bar chart}{figure.caption.5}{}}
+\newlabel{sub@fig:shap_bar}{{b}{7}{SHAP bar chart}{figure.caption.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces SHAP feature importance for the XGBoost regression model under Approach C (demographics + per-field PCA).}}{7}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:feature_importance}{{2}{7}{SHAP feature importance for the XGBoost regression model under Approach C (demographics + per-field PCA)}{figure.caption.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}The R$^2 \approx 0.28$ Ceiling}{7}{subsection.4.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Best regression model per approach (Test set)}}{8}{table.caption.6}\protected@file@percent }
+\newlabel{tab:regression_best}{{4}{8}{Best regression model per approach (Test set)}{table.caption.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Best classification model per approach (Test set)}}{8}{table.caption.7}\protected@file@percent }
+\newlabel{tab:classification_best}{{5}{8}{Best classification model per approach (Test set)}{table.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Learning curves across four feature construction approaches. All converge at similar validation R$^2$ levels.}}{9}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:learning_curves}{{3}{9}{Learning curves across four feature construction approaches. All converge at similar validation R$^2$ levels}{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{9}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Prompt Sensitivity: Tool and Risk}{9}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Redefining ``Representativeness''}{10}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}The Fundamental Limit of Individual Prediction}{10}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Limitations}{10}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{10}{section.6}\protected@file@percent }
+\bibcite{groves2009survey}{1}
+\bibcite{argyle2023out}{2}
+\bibcite{santurkar2023whose}{3}
+\bibcite{park2023generative}{4}
+\bibcite{barbera2015tweeting}{5}
+\bibcite{hersh2015hacking}{6}
+\bibcite{montgomery2018predicting}{7}
+\bibcite{reimers2019sentence}{8}
+\bibcite{ifop2025retraites}{9}
+\bibcite{elabe2026}{10}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Full Regression Results}{12}{appendix.A}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces All regression models $\times $ all approaches (Val set, sorted by R$^2$)}}{12}{table.caption.11}\protected@file@percent }
+\newlabel{tab:regression_all}{{6}{12}{All regression models $\times $ all approaches (Val set, sorted by R$^2$)}{table.caption.11}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {B}Prompt Templates}{12}{appendix.B}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {C}Reproducibility}{12}{appendix.C}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {D}Supplementary Figures}{13}{appendix.D}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces SHAP dependence plots for the top two features. Age shows a clear negative relationship with predicted support score.}}{13}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:shap_dependence}{{4}{13}{SHAP dependence plots for the top two features. Age shows a clear negative relationship with predicted support score}{figure.caption.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces XGBoost feature importance Top-20 across the four approaches.}}{13}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:feature_importance_grid}{{5}{13}{XGBoost feature importance Top-20 across the four approaches}{figure.caption.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Test-set performance comparison of all regression (left) and classification (right) models under Approach C.}}{14}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:model_comparison}{{6}{14}{Test-set performance comparison of all regression (left) and classification (right) models under Approach C}{figure.caption.14}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Confusion matrices for the best classifier under each approach.}}{14}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:confusion_matrices}{{7}{14}{Confusion matrices for the best classifier under each approach}{figure.caption.15}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Predicted vs.\ actual support scores (left) and residual distribution (right).}}{15}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:actual_vs_predicted}{{8}{15}{Predicted vs.\ actual support scores (left) and residual distribution (right)}{figure.caption.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Per-class precision, recall, and F1 under the best classifier per approach.}}{15}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:per_class_metrics}{{9}{15}{Per-class precision, recall, and F1 under the best classifier per approach}{figure.caption.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Test set performance comparison across four feature approaches. Left: regression Test R$^2$; Right: classification Test Macro F1.}}{16}{figure.caption.18}\protected@file@percent }
+\newlabel{fig:approach_comparison}{{10}{16}{Test set performance comparison across four feature approaches. Left: regression Test R$^2$; Right: classification Test Macro F1}{figure.caption.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Classification Val Macro F1 by approach and model type.}}{16}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:classification_by_approach}{{11}{16}{Classification Val Macro F1 by approach and model type}{figure.caption.19}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Validation curves for XGBoost hyperparameters (best approach).}}{17}{figure.caption.20}\protected@file@percent }
+\newlabel{fig:validation_curves}{{12}{17}{Validation curves for XGBoost hyperparameters (best approach)}{figure.caption.20}{}}
+\gdef \@abspage@last{17}

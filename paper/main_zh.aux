@@ -1,0 +1,93 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand*\HyPL@Entry[1]{}
+\citation{groves2009survey}
+\HyPL@Entry{0<</S/D>>}
+\@writefile{toc}{\contentsline {section}{\numberline {1}引言}{1}{section.1}\protected@file@percent }
+\citation{argyle2023out}
+\citation{santurkar2023whose}
+\citation{park2023generative}
+\citation{barbera2015tweeting}
+\citation{hersh2015hacking}
+\citation{montgomery2018predicting}
+\citation{reimers2019sentence}
+\@writefile{toc}{\contentsline {section}{\numberline {2}相关工作}{2}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}LLM作为模拟调查受访者}{2}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}计算政治科学}{2}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}句子嵌入与社会科学}{2}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}方法}{2}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}系统架构}{2}{subsection.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces 系统架构概览。流水线将画像数据通过LLM模拟转化为结构化回应，然后在宏观（分布层面）和微观（预测层面）两个层级进行评估。}}{3}{figure.caption.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:architecture}{{1}{3}{系统架构概览。流水线将画像数据通过LLM模拟转化为结构化回应，然后在宏观（分布层面）和微观（预测层面）两个层级进行评估。}{figure.caption.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}人物画像生成}{3}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Prompt工程：三轮迭代}{3}{subsection.3.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Prompt迭代对比及与IFOP基准的对齐程度}}{4}{table.caption.2}\protected@file@percent }
+\newlabel{tab:prompt_iterations}{{1}{4}{Prompt迭代对比及与IFOP基准的对齐程度}{table.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}LLM模拟设置}{4}{subsection.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}采样策略：相似度检索与随机抽样}{4}{subsection.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}ML特征与模型}{5}{subsection.3.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}评估协议}{5}{subsection.3.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}结果}{5}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Prompt的威力：从89\%到29\%}{5}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}与IFOP的对齐与错位}{5}{subsection.4.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces LLM模拟与IFOP调查的CSP职业分类对比（支持"回到62岁"的百分比）}}{6}{table.caption.3}\protected@file@percent }
+\newlabel{tab:occupation_compare}{{2}{6}{LLM模拟与IFOP调查的CSP职业分类对比（支持"回到62岁"的百分比）}{table.caption.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}谁来回答：相似度检索 vs. 随机抽样}{6}{subsection.4.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces 相似度检索与随机抽样的立场分布对比}}{6}{table.caption.4}\protected@file@percent }
+\newlabel{tab:sampling_comparison}{{3}{6}{相似度检索与随机抽样的立场分布对比}{table.caption.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}年龄压倒一切：个体层面的特征分析}{7}{subsection.4.4}\protected@file@percent }
+\newlabel{fig:shap_summary}{{2a}{7}{SHAP概要图}{figure.caption.5}{}}
+\newlabel{sub@fig:shap_summary}{{a}{7}{SHAP概要图}{figure.caption.5}{}}
+\newlabel{fig:shap_bar}{{2b}{7}{SHAP柱状图}{figure.caption.5}{}}
+\newlabel{sub@fig:shap_bar}{{b}{7}{SHAP柱状图}{figure.caption.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces 方案C（人口统计+逐字段PCA）XGBoost回归模型的SHAP特征重要性分析。}}{7}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:feature_importance}{{2}{7}{方案C（人口统计+逐字段PCA）XGBoost回归模型的SHAP特征重要性分析。}{figure.caption.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}R$^2\approx 0.28$的天花板}{8}{subsection.4.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces 各方案最佳回归模型（测试集）}}{8}{table.caption.6}\protected@file@percent }
+\newlabel{tab:regression_best}{{4}{8}{各方案最佳回归模型（测试集）}{table.caption.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces 各方案最佳分类模型（测试集）}}{8}{table.caption.7}\protected@file@percent }
+\newlabel{tab:classification_best}{{5}{8}{各方案最佳分类模型（测试集）}{table.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces 四种特征方案的学习曲线（2$\times $2）。所有方案在相近的验证集R$^2$水平上收敛。}}{9}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:learning_curves}{{3}{9}{四种特征方案的学习曲线（2$\times $2）。所有方案在相近的验证集R$^2$水平上收敛。}{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}讨论}{9}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Prompt敏感性：工具与风险}{9}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}"代表性"的再定义}{10}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}个体预测的根本限制}{10}{subsection.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}局限性}{10}{subsection.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}结论}{10}{section.6}\protected@file@percent }
+\bibcite{groves2009survey}{1}
+\bibcite{argyle2023out}{2}
+\bibcite{santurkar2023whose}{3}
+\bibcite{park2023generative}{4}
+\bibcite{barbera2015tweeting}{5}
+\bibcite{hersh2015hacking}{6}
+\bibcite{montgomery2018predicting}{7}
+\bibcite{reimers2019sentence}{8}
+\bibcite{ifop2025retraites}{9}
+\bibcite{elabe2026}{10}
+\@writefile{toc}{\contentsline {section}{\numberline {A}完整回归结果}{12}{appendix.A}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces 全部回归模型 $\times $ 全部方案（验证集，按R$^2$降序排列）}}{12}{table.caption.11}\protected@file@percent }
+\newlabel{tab:regression_all}{{6}{12}{全部回归模型 $\times $ 全部方案（验证集，按R$^2$降序排列）}{table.caption.11}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {B}Prompt模板}{12}{appendix.B}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {C}可复现性}{12}{appendix.C}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {D}补充图表}{13}{appendix.D}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces SHAP依赖图：展示排名前两位的特征（age和persona\_pc0）如何随特征取值变化影响模型预测。年龄与预测支持度呈明显的负相关关系，与法国退休改革的社会现实一致。}}{13}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:shap_dependence}{{4}{13}{SHAP依赖图：展示排名前两位的特征（age和persona\_pc0）如何随特征取值变化影响模型预测。年龄与预测支持度呈明显的负相关关系，与法国退休改革的社会现实一致。}{figure.caption.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces 四种方案下XGBoost特征重要性Top-20对比。红色为人口统计特征，蓝色为文本衍生特征。}}{13}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:feature_importance_grid}{{5}{13}{四种方案下XGBoost特征重要性Top-20对比。红色为人口统计特征，蓝色为文本衍生特征。}{figure.caption.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces 方案C下所有回归模型（左）和分类模型（右）的Test表现排名。}}{14}{figure.caption.14}\protected@file@percent }
+\newlabel{fig:model_comparison}{{6}{14}{方案C下所有回归模型（左）和分类模型（右）的Test表现排名。}{figure.caption.14}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces 四种方案最佳分类模型的混淆矩阵。方案D对"反对"类别的召回率为零。}}{14}{figure.caption.15}\protected@file@percent }
+\newlabel{fig:confusion_matrices}{{7}{14}{四种方案最佳分类模型的混淆矩阵。方案D对"反对"类别的召回率为零。}{figure.caption.15}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces 最优回归模型的预测值与真实值对比（左）及残差分布（右）。}}{15}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:actual_vs_predicted}{{8}{15}{最优回归模型的预测值与真实值对比（左）及残差分布（右）。}{figure.caption.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces 四种方案下最佳分类模型在三个类别上的精确率、召回率和F1得分。}}{15}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:per_class_metrics}{{9}{15}{四种方案下最佳分类模型在三个类别上的精确率、召回率和F1得分。}{figure.caption.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces 四种特征方案在测试集上的表现对比。左：回归Test R$^2$；右：分类Test Macro F1。}}{16}{figure.caption.18}\protected@file@percent }
+\newlabel{fig:approach_comparison}{{10}{16}{四种特征方案在测试集上的表现对比。左：回归Test R$^2$；右：分类Test Macro F1。}{figure.caption.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces 各方案各模型的分类Val Macro F1排名。}}{16}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:classification_by_approach}{{11}{16}{各方案各模型的分类Val Macro F1排名。}{figure.caption.19}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces XGBoost超参数验证曲线（最佳方案）。}}{17}{figure.caption.20}\protected@file@percent }
+\newlabel{fig:validation_curves}{{12}{17}{XGBoost超参数验证曲线（最佳方案）。}{figure.caption.20}{}}
+\gdef \@abspage@last{17}
