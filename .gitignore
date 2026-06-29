@@ -28,6 +28,8 @@ Thumbs.db
 # 数据文件（大文件）
 data/*.faiss
 data/**/*.parquet
+data/**/*.csv
+data/**/*.npz
 data/*.db
 
 # 缓存
@@ -45,11 +47,16 @@ catboost_info/
 # Jupyter
 .ipynb_checkpoints/
 
-# 未执行的实验脚本
-scripts/06_cross_model.py
-scripts/07_test_retest.py
-scripts/08_cross_topic.py
-scripts/09_cross_language.py
+# 提交包
+submission/
+submission.zip
+
+# PPT 临时文件
+*.ps1
 
 # 原始调查 PDF（大文件）
 社会调查/
+
+# 旧提交目录
+reports/
+tests/
